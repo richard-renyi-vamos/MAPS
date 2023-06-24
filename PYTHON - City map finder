@@ -1,0 +1,50 @@
+import folium
+
+def show_city_on_map(city_name):
+    # Create a map centered on the city
+    map_center = geocode_city(city_name)
+    if map_center is None:
+        print("Unable to find coordinates for the city.")
+        return
+
+    # Create the map
+    map_obj = folium.Map(location=map_center, zoom_start=12)
+
+    # Add a marker for the city
+    folium.Marker(
+        location=map_center,
+        popup=city_name,
+        icon=folium.Icon(color='blue', icon='info-sign')
+    ).add_to(map_obj)
+
+    # Display the map
+    map_obj.save('map.html')
+    print("Map saved as map.html. Open the file in a web browser to view the map.")
+
+def geocode_city(city_name):
+    # Perform geocoding to get the coordinates of the city
+    # You can use a geocoding service or library of your choice
+    # Here, we assume a function called 'geocode' is used
+    # Replace this with your own geocoding implementation
+    coordinates = geocode(city_name)
+
+    if coordinates is None:
+        return None
+
+    # Extract latitude and longitude
+    latitude, longitude = coordinates
+
+    return latitude, longitude
+
+def geocode(city_name):
+    # Implement your geocoding logic here
+    # This could involve using an API or a geocoding library
+    # Here, we simply return None as a placeholder
+    return None
+
+# Example usage
+city = input("Enter a city name: ")
+show_city_on_map(city)
+
+
+# CREATED WITH THE HELP OF OPEN-AI CHAT GPT: https://chat.openai.com/chat
